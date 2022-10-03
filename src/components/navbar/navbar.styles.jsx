@@ -6,5 +6,5 @@ export const NavbarContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   min-height: 20vh;
-  background-color: blue;
+  background-color: #bb86fc;
 `;
