@@ -85,7 +85,9 @@ const ListItem = ({ isStarred, isDone, category, title, body }) => {
       </MainContainer>
 
       <ParagraphContainer>
-        {active && <ListItemBody>{body}</ListItemBody>}{" "}
+        {active && (
+          <ListItemBody>{body ? body : "Body not specified"}</ListItemBody>
+        )}
       </ParagraphContainer>
     </ListItemContainer>
   );
