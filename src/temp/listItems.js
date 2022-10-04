@@ -13,6 +13,13 @@ const items = [
     isStarred: false,
     isDone: false,
   },
+  {
+    title: "Test Body",
+    body: "",
+    category: "Work",
+    isStarred: true,
+    isDone: false,
+  },
 ];
 
 export default items;

@@ -12,18 +12,18 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 
 import {
-  ListItemContainer,
+  TaskContainer,
   MainContainer,
   ParagraphContainer,
   CategoryContainer,
   Category,
-  ListItemHeading,
-  ListItemBody,
+  TaskHeader,
+  TaskBody,
   StyledCaretIcon,
   StyledDoneIcon,
   StyledStarIcon,
   StyledTrashIcon,
-} from "./list-item.styles";
+} from "./task.styles";
 
 const ListItem = ({ isStarred, isDone, category, title, body }) => {
   const [starred, setStarred] = useState(isStarred);
@@ -68,28 +68,26 @@ const ListItem = ({ isStarred, isDone, category, title, body }) => {
     );
 
   return (
-    <ListItemContainer>
+    <TaskContainer>
       <MainContainer>
         {doneIconHandler()}
         <CategoryContainer>
           <Category>{category}</Category>
         </CategoryContainer>
-        <ListItemHeading
+        <TaskHeader
           className={`${starred ? "starred" : ""} ${done ? "crossed" : ""}`}
         >
           {title}
-        </ListItemHeading>
+        </TaskHeader>
         {starIconHandler()}
         <StyledTrashIcon icon={faTrash} />
         {caretIconHandler()}
       </MainContainer>
 
       <ParagraphContainer>
-        {active && (
-          <ListItemBody>{body ? body : "Body not specified"}</ListItemBody>
-        )}
+        {active && <TaskBody>{body ? body : "Body not specified"}</TaskBody>}
       </ParagraphContainer>
-    </ListItemContainer>
+    </TaskContainer>
   );
 };
 

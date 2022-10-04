@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ListContainer = styled.div`
+export const TasksListContainer = styled.div`
   min-height: 80vh;
   background-color: #121212;
   display: flex;

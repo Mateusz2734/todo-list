@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 
-export const ListItemContainer = styled.div`
+export const TaskContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,11 +35,11 @@ export const CategoryContainer = styled.div`
   width: 20%;
 `;
 
-export const ListItemHeading = styled.h2`
+export const TaskHeader = styled.h2`
   margin: 0;
 `;
 
-export const ListItemBody = styled.p`
+export const TaskBody = styled.p`
   display: block;
   margin: 0;
   padding: 0.5rem 1rem;
