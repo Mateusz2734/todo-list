@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <>
       <NavbarContainer>
-        <NavbarItem title="Tasks" icon={faListCheck} />
+        <NavbarItem to="/tasks" title="Tasks" icon={faListCheck} />
         <NavbarItem title="Lists" icon={faGrip} />
         <NavbarItem title="New" icon={faPlus} />
       </NavbarContainer>
