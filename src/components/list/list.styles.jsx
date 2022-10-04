@@ -5,13 +5,9 @@ export const ListContainer = styled.div`
   background-color: #121212;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  div:first-child {
-    margin-top: 2rem;
-  }
+`;
 
-  div:last-child {
-    margin-bottom: 10rem;
-  }
+export const Spacer = styled.div`
+  margin-top: 2rem;
 `;
