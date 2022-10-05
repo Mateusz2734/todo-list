@@ -5,6 +5,6 @@ export const NavbarContainer = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  min-height: 20vh;
-  background-color: #bb86fc;
+  height: 15vh;
+  background-color: #b195c6;
 `;

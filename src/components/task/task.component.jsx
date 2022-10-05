@@ -85,7 +85,7 @@ const ListItem = ({ isStarred, isDone, category, title, body }) => {
       </MainContainer>
 
       <ParagraphContainer>
-        {active && <TaskBody>{body ? body : "Body not specified"}</TaskBody>}
+        {active && <TaskBody>{body ? body : "*Body not specified*"}</TaskBody>}
       </ParagraphContainer>
     </TaskContainer>
   );

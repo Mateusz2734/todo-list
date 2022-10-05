@@ -47,7 +47,7 @@ export const TaskBody = styled.p`
 
 export const Category = styled.span`
   border-radius: 2rem;
-  background-color: #bb86fc;
+  background-color: #b195c6;
   padding: 0 1rem;
   margin-right: 5rem;
 `;
