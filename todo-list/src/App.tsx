@@ -1,24 +1,17 @@
-import { useState } from 'react';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Settings from './pages/SettingsPage';
+import Home from './pages/HomePage';
+import Layout from './components/Layout';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function JoyOrderDashboardTemplate() {
   return (
-    <>
-      <div>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/settings" element={<Settings />} />
+      </Route>
+    </Routes>
+
   );
 }
 
-export default App;
