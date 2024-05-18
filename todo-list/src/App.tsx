@@ -11,6 +11,13 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/tasks" >
+          <Route index element={<>Choose</>} />
+          <Route path="all" element={<>All</>} />
+          <Route path="today" element={<>Today</>} />
+          <Route path="in_progress" element={<>In Progress</>} />
+          <Route path="done" element={<>Done</>} />
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Route>
