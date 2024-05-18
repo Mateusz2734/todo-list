@@ -20,163 +20,169 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBulletedRounded';
 import QueryBuilderRoundedIcon from '@mui/icons-material/QueryBuilderRounded';
 
-import ColorSchemeToggle from './ColorSchemeToggle';
+import { ColorSchemeToggle } from './ColorSchemeToggle';
+import { TaskAdder } from './TaskAdder';
 import { closeSidebar } from '../utils';
 
 export default function Sidebar() {
     const navigate = useNavigate();
     const location = useLocation();
+    const [modalOpen, setModalOpen] = useState(false);
 
     return (
-        <Sheet
-            className="Sidebar"
-            sx={{
-                position: { xs: 'fixed', md: 'sticky' },
-                transform: {
-                    xs: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1)))',
-                    md: 'none',
-                },
-                transition: 'transform 0.4s, width 0.4s',
-                zIndex: 10000,
-                height: '100dvh',
-                width: 'var(--Sidebar-width)',
-                top: 0,
-                p: 2,
-                flexShrink: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-                borderRight: '1px solid',
-                borderColor: 'divider',
-            }}
-        >
-            <GlobalStyles
-                styles={(theme) => ({
-                    ':root': {
-                        '--Sidebar-width': '220px',
-                        [theme.breakpoints.up('lg')]: {
-                            '--Sidebar-width': '240px',
-                        },
-                    },
-                })}
-            />
-            <Box
-                className="Sidebar-overlay"
+        <>
+            <TaskAdder modalOpen={modalOpen} setModalOpen={setModalOpen} />
+            <Sheet
+                className="Sidebar"
                 sx={{
-                    position: 'fixed',
-                    zIndex: 9998,
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    height: '100vh',
-                    opacity: 'var(--SideNavigation-slideIn)',
-                    backgroundColor: 'var(--joy-palette-background-backdrop)',
-                    transition: 'opacity 0.4s',
+                    position: { xs: 'fixed', md: 'sticky' },
                     transform: {
-                        xs: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))',
-                        lg: 'translateX(-100%)',
+                        xs: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1)))',
+                        md: 'none',
                     },
-                }}
-                onClick={() => closeSidebar()}
-            />
-            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-                <Typography level="title-lg">TODO List</Typography>
-                <ColorSchemeToggle sx={{ ml: 'auto' }} />
-            </Box>
-            <Box
-                sx={{
-                    minHeight: 0,
-                    overflow: 'hidden auto',
-                    flexGrow: 1,
+                    transition: 'transform 0.4s, width 0.4s',
+                    zIndex: 10000,
+                    height: '100dvh',
+                    width: 'var(--Sidebar-width)',
+                    top: 0,
+                    p: 2,
+                    flexShrink: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    [`& .${listItemButtonClasses.root}`]: {
-                        gap: 1.5,
-                    },
+                    gap: 2,
+                    borderRight: '1px solid',
+                    borderColor: 'divider',
                 }}
             >
-                <List
-                    size="sm"
+                <GlobalStyles
+                    styles={(theme) => ({
+                        ':root': {
+                            '--Sidebar-width': '220px',
+                            [theme.breakpoints.up('lg')]: {
+                                '--Sidebar-width': '240px',
+                            },
+                        },
+                    })}
+                />
+                <Box
+                    className="Sidebar-overlay"
                     sx={{
-                        gap: 1,
-                        '--List-nestedInsetStart': '30px',
-                        '--ListItem-radius': (theme) => theme.vars.radius.sm,
+                        position: 'fixed',
+                        zIndex: 9998,
+                        top: 0,
+                        left: 0,
+                        width: '100vw',
+                        height: '100vh',
+                        opacity: 'var(--SideNavigation-slideIn)',
+                        backgroundColor: 'var(--joy-palette-background-backdrop)',
+                        transition: 'opacity 0.4s',
+                        transform: {
+                            xs: 'translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))',
+                            lg: 'translateX(-100%)',
+                        },
+                    }}
+                    onClick={() => closeSidebar()}
+                />
+                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+                    <Typography level="title-lg">TODO List</Typography>
+                    <ColorSchemeToggle sx={{ ml: 'auto' }} />
+                </Box>
+                <Box
+                    sx={{
+                        minHeight: 0,
+                        overflow: 'hidden auto',
+                        flexGrow: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        [`& .${listItemButtonClasses.root}`]: {
+                            gap: 1.5,
+                        },
                     }}
                 >
-                    <IconItem
-                        icon={<AddCircleOutlineOutlinedIcon />}
-                        text="Add task"
-                        title
-                    />
-                    <IconItem
-                        icon={<HomeRoundedIcon />}
-                        text="Home"
-                        onClick={() => navigate("/")}
-                        selected={location.pathname === "/"}
-                        title
-                    />
-                    <ListItem nested>
-                        <Toggler
-                            defaultExpanded
-                            renderToggle={({ open, setOpen }) => (
-                                <ListItemButton onClick={() => setOpen(!open)} selected={location.pathname === "/tasks"}>
-                                    <AssignmentRoundedIcon />
-                                    <ListItemContent>
-                                        <Typography level="title-sm">Tasks</Typography>
-                                    </ListItemContent>
-                                    <KeyboardArrowDownIcon
-                                        sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
+                    <List
+                        size="sm"
+                        sx={{
+                            gap: 1,
+                            '--List-nestedInsetStart': '30px',
+                            '--ListItem-radius': (theme) => theme.vars.radius.sm,
+                        }}
+                    >
+                        <IconItem
+                            icon={<AddCircleOutlineOutlinedIcon />}
+                            text="Add task"
+                            title
+                            onClick={() => setModalOpen(!modalOpen)}
+                        />
+                        <IconItem
+                            icon={<HomeRoundedIcon />}
+                            text="Home"
+                            onClick={() => navigate("/")}
+                            selected={location.pathname === "/"}
+                            title
+                        />
+                        <ListItem nested>
+                            <Toggler
+                                defaultExpanded
+                                renderToggle={({ open, setOpen }) => (
+                                    <ListItemButton onClick={() => setOpen(!open)} selected={location.pathname === "/tasks"}>
+                                        <AssignmentRoundedIcon />
+                                        <ListItemContent>
+                                            <Typography level="title-sm">Tasks</Typography>
+                                        </ListItemContent>
+                                        <KeyboardArrowDownIcon
+                                            sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
+                                        />
+                                    </ListItemButton>
+                                )}
+                            >
+                                <List >
+                                    <IconItem
+                                        icon={<FormatListBulletedRoundedIcon />}
+                                        text="All"
+                                        onClick={() => navigate("/tasks/all")}
+                                        selected={location.pathname === "/tasks/all"}
                                     />
-                                </ListItemButton>
-                            )}
-                        >
-                            <List >
-                                <IconItem
-                                    icon={<FormatListBulletedRoundedIcon />}
-                                    text="All"
-                                    onClick={() => navigate("/tasks/all")}
-                                    selected={location.pathname === "/tasks/all"}
-                                />
-                                <IconItem
-                                    icon={<CalendarTodayOutlinedIcon />}
-                                    text="Today"
-                                    onClick={() => navigate("/tasks/today")}
-                                    selected={location.pathname === "/tasks/today"}
-                                />
-                                <IconItem
-                                    icon={<QueryBuilderRoundedIcon />}
-                                    text="In progress"
-                                    onClick={() => navigate("/tasks/in_progress")}
-                                    selected={location.pathname === "/tasks/in_progress"}
-                                />
-                                <IconItem
-                                    icon={<CheckCircleOutlineRoundedIcon />}
-                                    text="Done"
-                                    onClick={() => navigate("/tasks/done")}
-                                    selected={location.pathname === "/tasks/done"}
-                                />
-                            </List>
-                        </Toggler>
-                    </ListItem>
-                </List>
-                <List
-                    size="sm"
-                    sx={{
-                        mt: 'auto',
-                        flexGrow: 0,
-                        '--ListItem-radius': (theme) => theme.vars.radius.sm,
-                        '--List-gap': '8px',
-                    }}
-                >
-                    <IconItem
-                        icon={<SettingsRoundedIcon />}
-                        text="Settings"
-                        onClick={() => navigate("/settings")}
-                        selected={location.pathname === "/settings"}
-                    />
-                </List>
-            </Box>
-        </Sheet>
+                                    <IconItem
+                                        icon={<CalendarTodayOutlinedIcon />}
+                                        text="Today"
+                                        onClick={() => navigate("/tasks/today")}
+                                        selected={location.pathname === "/tasks/today"}
+                                    />
+                                    <IconItem
+                                        icon={<QueryBuilderRoundedIcon />}
+                                        text="In progress"
+                                        onClick={() => navigate("/tasks/in_progress")}
+                                        selected={location.pathname === "/tasks/in_progress"}
+                                    />
+                                    <IconItem
+                                        icon={<CheckCircleOutlineRoundedIcon />}
+                                        text="Done"
+                                        onClick={() => navigate("/tasks/done")}
+                                        selected={location.pathname === "/tasks/done"}
+                                    />
+                                </List>
+                            </Toggler>
+                        </ListItem>
+                    </List>
+                    <List
+                        size="sm"
+                        sx={{
+                            mt: 'auto',
+                            flexGrow: 0,
+                            '--ListItem-radius': (theme) => theme.vars.radius.sm,
+                            '--List-gap': '8px',
+                        }}
+                    >
+                        <IconItem
+                            icon={<SettingsRoundedIcon />}
+                            text="Settings"
+                            onClick={() => navigate("/settings")}
+                            selected={location.pathname === "/settings"}
+                        />
+                    </List>
+                </Box>
+            </Sheet>
+        </>
     );
 }
 
@@ -230,3 +236,4 @@ function IconItem({ icon, text, onClick, title, selected }: IconItemProps) {
         </ListItem>
     );
 }
+
