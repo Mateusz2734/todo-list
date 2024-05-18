@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
 import GlobalStyles from '@mui/joy/GlobalStyles';
@@ -25,6 +25,8 @@ import { closeSidebar } from '../utils';
 
 export default function Sidebar() {
     const navigate = useNavigate();
+    const location = useLocation();
+
     return (
         <Sheet
             className="Sidebar"
@@ -101,14 +103,23 @@ export default function Sidebar() {
                         '--ListItem-radius': (theme) => theme.vars.radius.sm,
                     }}
                 >
-                    <IconItem icon={<AddCircleOutlineOutlinedIcon />} text="Add task" title />
-                    <IconItem icon={<HomeRoundedIcon />} text="Home" selected title />
-
+                    <IconItem
+                        icon={<AddCircleOutlineOutlinedIcon />}
+                        text="Add task"
+                        title
+                    />
+                    <IconItem
+                        icon={<HomeRoundedIcon />}
+                        text="Home"
+                        onClick={() => navigate("/")}
+                        selected={location.pathname === "/"}
+                        title
+                    />
                     <ListItem nested>
                         <Toggler
                             defaultExpanded
                             renderToggle={({ open, setOpen }) => (
-                                <ListItemButton onClick={() => setOpen(!open)}>
+                                <ListItemButton onClick={() => setOpen(!open)} selected={location.pathname === "/tasks"}>
                                     <AssignmentRoundedIcon />
                                     <ListItemContent>
                                         <Typography level="title-sm">Tasks</Typography>
@@ -120,10 +131,30 @@ export default function Sidebar() {
                             )}
                         >
                             <List >
-                                <IconItem icon={<FormatListBulletedRoundedIcon />} text="All" />
-                                <IconItem icon={<CalendarTodayOutlinedIcon />} text="Today" />
-                                <IconItem icon={<QueryBuilderRoundedIcon />} text="In progress" />
-                                <IconItem icon={<CheckCircleOutlineRoundedIcon />} text="Done" />
+                                <IconItem
+                                    icon={<FormatListBulletedRoundedIcon />}
+                                    text="All"
+                                    onClick={() => navigate("/tasks/all")}
+                                    selected={location.pathname === "/tasks/all"}
+                                />
+                                <IconItem
+                                    icon={<CalendarTodayOutlinedIcon />}
+                                    text="Today"
+                                    onClick={() => navigate("/tasks/today")}
+                                    selected={location.pathname === "/tasks/today"}
+                                />
+                                <IconItem
+                                    icon={<QueryBuilderRoundedIcon />}
+                                    text="In progress"
+                                    onClick={() => navigate("/tasks/in_progress")}
+                                    selected={location.pathname === "/tasks/in_progress"}
+                                />
+                                <IconItem
+                                    icon={<CheckCircleOutlineRoundedIcon />}
+                                    text="Done"
+                                    onClick={() => navigate("/tasks/done")}
+                                    selected={location.pathname === "/tasks/done"}
+                                />
                             </List>
                         </Toggler>
                     </ListItem>
@@ -137,7 +168,12 @@ export default function Sidebar() {
                         '--List-gap': '8px',
                     }}
                 >
-                    <IconItem icon={<SettingsRoundedIcon />} text="Settings" onClick={() => navigate("/settings")} />
+                    <IconItem
+                        icon={<SettingsRoundedIcon />}
+                        text="Settings"
+                        onClick={() => navigate("/settings")}
+                        selected={location.pathname === "/settings"}
+                    />
                 </List>
             </Box>
         </Sheet>
