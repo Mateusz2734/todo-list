@@ -4,6 +4,7 @@ import NotFound from './pages/NotFound';
 import Settings from './pages/Settings';
 import Home from './pages/Home';
 import Layout from './components/Layout';
+import { SitemapItem } from './types';
 
 export default function App() {
   return (
@@ -18,17 +19,11 @@ export default function App() {
           <Route path="in_progress" element={<>In Progress</>} />
           <Route path="done" element={<>Done</>} />
         </Route>
-
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
 }
-
-export type SitemapItem = {
-  path: string;
-  name: string;
-};
 
 export const sitemap: SitemapItem[] = [
   { path: "/", name: "Home" },
