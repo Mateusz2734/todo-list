@@ -10,7 +10,6 @@ import { sitemap, SitemapItem } from '../App';
 
 export function Breadcrumbs() {
     const location = useLocation();
-
     return (
         <JoyBreadcrumbs
             aria-label="breadcrumbs" size="sm"
@@ -44,18 +43,18 @@ function getBasePaths(path: string): string[] {
 }
 
 function getBreadcrumbs(path: string, sitemap: SitemapItem[]): JSX.Element[] {
-    const basePaths = getBasePaths(path);
+    const paths = getBasePaths(path);
     const breadcrumbs: JSX.Element[] = [];
 
-    basePaths.forEach(basePath => {
-        const sitemapItem = sitemap.find(item => item.path === basePath);
+    paths.forEach(path => {
+        const sitemapItem = sitemap.find(item => item.path === path);
         if (sitemapItem) {
             breadcrumbs.push(
                 <Link
-                    key={basePath}
+                    key={path}
                     underline="hover"
                     color="primary"
-                    href={basePath}
+                    href={path}
                     fontSize={12}
                     fontWeight={500}
                 >
@@ -65,15 +64,18 @@ function getBreadcrumbs(path: string, sitemap: SitemapItem[]): JSX.Element[] {
         }
     });
 
-    if (breadcrumbs.length > 0) {
-        breadcrumbs[breadcrumbs.length - 1] = (
+    const breadLen = breadcrumbs.length;
+    const pathsLen = paths.length;
+
+    if (breadLen > 0 && pathsLen == breadLen) {
+        breadcrumbs[breadLen - 1] = (
             <Typography
-                key={basePaths[basePaths.length - 1]}
+                key={paths[pathsLen - 1]}
                 color="neutral"
                 fontWeight={500}
                 fontSize={12}
             >
-                {breadcrumbs[breadcrumbs.length - 1].props.children}
+                {breadcrumbs[breadLen - 1].props.children}
             </Typography>
         );
     }
