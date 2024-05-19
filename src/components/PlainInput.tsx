@@ -13,6 +13,12 @@ export function PlainInput(props: PlainInputProps) {
                 "--Input-focusedThickness": 0,
                 "--Input-paddingInline": 0,
             }}
+
+            slotProps={{
+                input: {
+                    autoComplete: "off",
+                }
+            }}
         >
             {props.children}
         </Input>
