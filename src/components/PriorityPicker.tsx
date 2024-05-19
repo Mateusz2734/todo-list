@@ -5,7 +5,7 @@ import Dropdown from "@mui/joy/Dropdown";
 import Menu from "@mui/joy/Menu";
 import MenuButton from "@mui/joy/MenuButton";
 import MenuItem from "@mui/joy/MenuItem";
-import FlagIcon from "@mui/icons-material/FlagOutlined";
+import FlagIcon from "@mui/icons-material/FlagRounded";
 
 import { PartialTask, Priority } from "../types";
 
@@ -51,10 +51,10 @@ type Item = {
 };
 
 const items: Item[] = [
-    { name: 'High', color: 'red', priority: 'high' },
-    { name: 'Medium', color: 'yellow', priority: 'medium' },
-    { name: 'Low', color: 'green', priority: 'low' },
-    { name: 'None', color: 'gray', priority: 'none' }
+    { name: 'High', color: 'var(--joy-palette-danger-500, #C41C1C)', priority: 'high' },
+    { name: 'Medium', color: 'var(--joy-palette-warning-500, #9A5B13)', priority: 'medium' },
+    { name: 'Low', color: 'var(--joy-palette-success-500, #1F7A1F)', priority: 'low' },
+    { name: 'None', color: 'var(--joy-palette-neutral-500, #636B74)', priority: 'none' }
 ];
 
 function displayText(id: number) {
