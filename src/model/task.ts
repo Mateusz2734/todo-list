@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-import { Task, PartialTask } from './types';
+import { Task, PartialTask } from '../types';
 
 export function createTask(data: PartialTask): Task {
   return {

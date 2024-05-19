@@ -22,7 +22,6 @@ import QueryBuilderRoundedIcon from '@mui/icons-material/QueryBuilderRounded';
 
 import { ColorSchemeToggle } from './ColorSchemeToggle';
 import { TaskAdder } from './TaskAdder';
-import { closeSidebar } from '../utils';
 
 export default function Sidebar() {
     const navigate = useNavigate();
@@ -237,3 +236,29 @@ function IconItem({ icon, text, onClick, title, selected }: IconItemProps) {
     );
 }
 
+function openSidebar() {
+    if (typeof window !== 'undefined') {
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.setProperty('--SideNavigation-slideIn', '1');
+    }
+}
+
+function closeSidebar() {
+    if (typeof window !== 'undefined') {
+        document.documentElement.style.removeProperty('--SideNavigation-slideIn');
+        document.body.style.removeProperty('overflow');
+    }
+}
+
+export function toggleSidebar() {
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+        const slideIn = window
+            .getComputedStyle(document.documentElement)
+            .getPropertyValue('--SideNavigation-slideIn');
+        if (slideIn) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    }
+}

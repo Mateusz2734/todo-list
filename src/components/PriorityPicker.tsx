@@ -7,7 +7,8 @@ import MenuButton from "@mui/joy/MenuButton";
 import MenuItem from "@mui/joy/MenuItem";
 import FlagIcon from "@mui/icons-material/FlagRounded";
 
-import { PartialTask, Priority } from "../types";
+import { PartialTask } from "../types";
+import { priorityColors } from "../model/priority";
 
 type PriorityPickerProps = {
     open: boolean;
@@ -19,7 +20,7 @@ export function PriorityPicker({ open, handleOpenChange, handleChange }: Priorit
     const [currId, setCurrId] = useState(3);
 
     const createHandleClose = (index: number) => () => {
-        handleChange({ target: { name: "priority", value: items[index].priority } });
+        handleChange({ target: { name: "priority", value: priorityColors[index].priority } });
         setCurrId(index);
     };
 
@@ -28,12 +29,12 @@ export function PriorityPicker({ open, handleOpenChange, handleChange }: Priorit
             <MenuButton
                 sx={{ p: 0.5, fontWeight: "sm", fontSize: "xs" }}
                 size="sm"
-                startDecorator={<FlagIcon htmlColor={items[currId].color} />}
+                startDecorator={<FlagIcon htmlColor={priorityColors[currId].color} />}
             >
                 {displayText(currId)}
             </MenuButton>
             <Menu sx={{ zIndex: 100000 }}>
-                {items.map((item, index) => (
+                {priorityColors.map((item, index) => (
                     <MenuItem key={index} onClick={createHandleClose(index)} selected={index === currId}>
                         <FlagIcon htmlColor={item.color} />
                         {item.name}
@@ -44,19 +45,6 @@ export function PriorityPicker({ open, handleOpenChange, handleChange }: Priorit
     );
 }
 
-type Item = {
-    name: string;
-    color: string;
-    priority: Priority;
-};
-
-const items: Item[] = [
-    { name: 'High', color: 'var(--joy-palette-danger-500, #C41C1C)', priority: 'high' },
-    { name: 'Medium', color: 'var(--joy-palette-warning-500, #9A5B13)', priority: 'medium' },
-    { name: 'Low', color: 'var(--joy-palette-success-500, #1F7A1F)', priority: 'low' },
-    { name: 'None', color: 'var(--joy-palette-neutral-500, #636B74)', priority: 'none' }
-];
-
 function displayText(id: number) {
-    return id < 3 ? items[id].name : 'Priority';
+    return id < 3 ? priorityColors[id].name : 'Priority';
 }

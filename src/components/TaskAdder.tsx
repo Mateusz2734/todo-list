@@ -10,7 +10,7 @@ import Divider from '@mui/joy/Divider';
 
 import { PlainInput } from './PlainInput';
 import { PartialTask, Task } from '../types';
-import { createTask } from '../task';
+import { createTask } from '../model/task';
 import dayjs from 'dayjs';
 import { DatePicker } from './DatePicker';
 import { PriorityPicker } from './PriorityPicker';
