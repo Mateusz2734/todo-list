@@ -4,6 +4,7 @@ import Box from '@mui/joy/Box';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import { Breadcrumbs } from './Breadcrumbs';
+import { Stack } from '@mui/joy';
 
 
 export default function Layout() {
@@ -37,7 +38,11 @@ export default function Layout() {
                     >
                         <Box sx={{ px: { xs: 2, md: 6 } }}>
                             <Breadcrumbs />
-                            <Outlet />
+                            <Stack alignItems={"center"} >
+                                <Stack width={"80%"} alignItems={"center"} >
+                                    <Outlet />
+                                </Stack>
+                            </Stack>
                         </Box>
                     </Box>
                 </Box>
