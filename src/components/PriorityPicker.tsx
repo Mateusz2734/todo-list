@@ -36,7 +36,7 @@ export function PriorityPicker({ open, handleOpenChange, handleChange }: Priorit
             <Menu sx={{ zIndex: 100000 }}>
                 {priorityColors.map((item, index) => (
                     <MenuItem key={index} onClick={createHandleClose(index)} selected={index === currId}>
-                        <FlagIcon htmlColor={item.color} />
+                        <FlagIcon htmlColor={item.htmlColor} />
                         {item.name}
                     </MenuItem>
                 ))}

@@ -1,4 +1,5 @@
 import { Dayjs } from "dayjs";
+import { ColorPaletteProp } from "@mui/joy";
 
 export type SitemapItem = {
   path: string;
@@ -11,7 +12,8 @@ export type Priority = "high" | "medium" | "low" | "none";
 
 export type PriorityColor = {
   name: string;
-  color: string;
+  htmlColor: string;
+  color: ColorPaletteProp;
   priority: Priority;
 };
 
