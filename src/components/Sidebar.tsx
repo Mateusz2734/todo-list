@@ -17,8 +17,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
-import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBulletedRounded';
 import QueryBuilderRoundedIcon from '@mui/icons-material/QueryBuilderRounded';
+import InboxIcon from '@mui/icons-material/Inbox';
 
 import { ColorSchemeToggle } from './ColorSchemeToggle';
 import { TaskAdder } from './TaskAdder';
@@ -136,10 +136,10 @@ export default function Sidebar() {
                             >
                                 <List >
                                     <IconItem
-                                        icon={<FormatListBulletedRoundedIcon />}
-                                        text="All"
-                                        onClick={() => navigate("/tasks/all")}
-                                        selected={location.pathname === "/tasks/all"}
+                                        icon={<InboxIcon />}
+                                        text="Inbox"
+                                        onClick={() => navigate("/tasks/inbox")}
+                                        selected={location.pathname === "/tasks/inbox"}
                                     />
                                     <IconItem
                                         icon={<CalendarTodayOutlinedIcon />}
