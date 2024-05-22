@@ -6,7 +6,7 @@ export type SitemapItem = {
   name: string;
 };
 
-export type Status = 'todo' | 'in_progress' | 'done';
+export type Status = 'todo' | 'done';
 
 export type Priority = "high" | "medium" | "low" | "none";
 

@@ -17,7 +17,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
-import QueryBuilderRoundedIcon from '@mui/icons-material/QueryBuilderRounded';
 import InboxIcon from '@mui/icons-material/Inbox';
 
 import { ColorSchemeToggle } from './ColorSchemeToggle';
@@ -146,12 +145,6 @@ export default function Sidebar() {
                                         text="Today"
                                         onClick={() => navigate("/tasks/today")}
                                         selected={location.pathname === "/tasks/today"}
-                                    />
-                                    <IconItem
-                                        icon={<QueryBuilderRoundedIcon />}
-                                        text="In progress"
-                                        onClick={() => navigate("/tasks/in_progress")}
-                                        selected={location.pathname === "/tasks/in_progress"}
                                     />
                                     <IconItem
                                         icon={<CheckCircleOutlineRoundedIcon />}

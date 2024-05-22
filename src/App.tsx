@@ -18,7 +18,6 @@ export default function App() {
           <Route index element={<></>} />
           <Route path="inbox" element={<AllTasks />} />
           <Route path="today" element={<></>} />
-          <Route path="in_progress" element={<></>} />
           <Route path="done" element={<DoneTasks />} />
         </Route>
         <Route path="*" element={<NotFound />} />
