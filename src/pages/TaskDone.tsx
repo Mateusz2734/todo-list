@@ -3,7 +3,6 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import { TaskCard } from "../components/TaskCard";
 import { Task } from "../types";
 
-
 export default function TaskDonePage() {
     const [tasks, setTasks] = useLocalStorage<Task[]>("tasks", []);
 
