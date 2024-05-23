@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import dayjs from 'dayjs';
 
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import Box from '@mui/joy/Box';
@@ -9,6 +10,7 @@ import ListItemButton, { listItemButtonClasses } from '@mui/joy/ListItemButton';
 import ListItemContent from '@mui/joy/ListItemContent';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
+import Stack from '@mui/joy/Stack';
 
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
@@ -20,9 +22,11 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 import InboxIcon from '@mui/icons-material/Inbox';
 
 import { ColorSchemeToggle } from './ColorSchemeToggle';
+import useTaskStore from '../model/store';
 import { TaskAdder } from './TaskAdder';
 
 export default function Sidebar() {
+    const { getCountWithFilter } = useTaskStore();
     const navigate = useNavigate();
     const location = useLocation();
     const [modalOpen, setModalOpen] = useState(false);
@@ -139,12 +143,14 @@ export default function Sidebar() {
                                         text="Inbox"
                                         onClick={() => navigate("/tasks/inbox")}
                                         selected={location.pathname === "/tasks/inbox"}
+                                        value={getCountWithFilter((task) => task.status === "todo")}
                                     />
                                     <IconItem
                                         icon={<CalendarTodayOutlinedIcon />}
                                         text="Today"
                                         onClick={() => navigate("/tasks/today")}
                                         selected={location.pathname === "/tasks/today"}
+                                        value={getCountWithFilter((task) => task.status === "todo" && dayjs(task.dueDate).isSame(dayjs(), "day"))}
                                     />
                                     <IconItem
                                         icon={<CheckCircleOutlineRoundedIcon />}
@@ -216,16 +222,31 @@ type IconItemProps = {
     onClick?: () => void;
     selected?: boolean;
     title?: boolean;
+    value?: number;
 };
 
-function IconItem({ icon, text, onClick, title, selected }: IconItemProps) {
+function IconItem({ icon, text, onClick, title, selected, value }: IconItemProps) {
     return (
         <ListItem>
             <ListItemButton selected={selected} onClick={onClick}>
                 {icon}
                 {title ? text : <Typography level="title-sm">{text}</Typography>}
+                {countIndicator(value)}
             </ListItemButton>
-        </ListItem>
+        </ListItem >
+    );
+}
+
+function countIndicator(value: number | undefined) {
+    if (!value) {
+        return undefined;
+    }
+    const text = value > 9 ? "9+" : value.toString();
+    return (
+        <>
+            <Stack width="100%"></Stack>
+            <Typography level="body-xs">{text}</Typography>
+        </>
     );
 }
 
