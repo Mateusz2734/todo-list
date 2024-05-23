@@ -8,7 +8,7 @@ export default function TasksLayout() {
     const location = useLocation();
 
     return (
-        <Stack width={"60%"} spacing={2}>
+        <Stack width={{ lg: "60%", xs: "100%" }} spacing={2}>
             <Typography level="h2">
                 {sitemap.find((item) => item.path === location.pathname)?.name}
             </Typography>
