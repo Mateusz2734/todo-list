@@ -39,22 +39,25 @@ export function TaskCard({ task }: TaskCardProps) {
 
     return (
         <Sheet sx={{ p: 1 }}>
-            <Stack direction="row" spacing={1} width="100%" height="100%">
+            <Stack direction="row" spacing={1} width="100%" height="100%" justifyContent="space-around">
                 <Stack justifyContent="center">
                     <HoverableIcon
                         size="sm"
                         {...hoverableIconProps}
                     />
                 </Stack>
-                <Stack width="100%">
-                    <Typography level="title-sm">{task.name}</Typography>
-                    <Typography level="body-sm">{task.description}</Typography>
+                <Stack width="80%">
+                    <Typography width="80%" noWrap level="title-sm">{task.name}</Typography>
+                    <Typography width="80%" noWrap level="body-sm">{task.description}</Typography>
                     <DateChip date={task.dueDate} done={task.status === "done"} />
                 </Stack>
 
-                <IconButton color="danger" variant="plain" onClick={() => removeTask(task.id)}>
-                    <DeleteIcon />
-                </IconButton>
+                <Stack justifyContent="center" alignItems="flex-end">
+                    <IconButton color="danger" variant="plain" onClick={() => removeTask(task.id)}>
+                        <DeleteIcon />
+                    </IconButton>
+
+                </Stack>
             </Stack>
         </Sheet>
     );
