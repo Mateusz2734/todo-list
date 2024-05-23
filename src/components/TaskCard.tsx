@@ -8,6 +8,7 @@ import RadioButtonIcon from '@mui/icons-material/RadioButtonUncheckedOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircleOutlined';
 import RestoreIcon from '@mui/icons-material/Restore';
 
+import useTaskStore from '../model/store';
 import { HoverableIcon } from './HoverableIcon';
 import { priorityColors } from '../model/priority';
 import { Task } from '../types';
@@ -15,16 +16,16 @@ import { DateChip } from './DateChip';
 
 type TaskCardProps = {
     task: Task;
-    onDelete: (id: string) => void;
-    onMutate: (id: string, updatedTask: Task) => void;
 };
 
-export function TaskCard({ task, onDelete, onMutate }: TaskCardProps) {
+export function TaskCard({ task }: TaskCardProps) {
+    const { editTask, removeTask } = useTaskStore();
+
     const hoverableIconProps = task.status === "done" ? {
         DefaultIcon: RestoreIcon,
         onClick: () => {
             const updatedTask: Task = { ...task, status: "todo" };
-            onMutate(task.id, updatedTask);
+            editTask(task.id, updatedTask);
         }
     } : {
         DefaultIcon: RadioButtonIcon,
@@ -32,7 +33,7 @@ export function TaskCard({ task, onDelete, onMutate }: TaskCardProps) {
         color: priorityColors.find((elem) => elem.priority === task.priority)!.color,
         onClick: () => {
             const updatedTask: Task = { ...task, status: "done" };
-            onMutate(task.id, updatedTask);
+            editTask(task.id, updatedTask);
         }
     };
 
@@ -51,7 +52,7 @@ export function TaskCard({ task, onDelete, onMutate }: TaskCardProps) {
                     <DateChip date={task.dueDate} done={task.status === "done"} />
                 </Stack>
 
-                <IconButton color="danger" variant="plain" onClick={() => onDelete(task.id)}>
+                <IconButton color="danger" variant="plain" onClick={() => removeTask(task.id)}>
                     <DeleteIcon />
                 </IconButton>
             </Stack>

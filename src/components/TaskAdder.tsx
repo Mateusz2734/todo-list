@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { useLocalStorage } from '@uidotdev/usehooks';
 import { Formik, Form } from 'formik';
+import dayjs from 'dayjs';
 
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
@@ -9,11 +9,11 @@ import Button from '@mui/joy/Button';
 import Divider from '@mui/joy/Divider';
 
 import { PlainInput } from './PlainInput';
-import { PartialTask, Task } from '../types';
+import { PartialTask } from '../types';
 import { createTask } from '../model/task';
-import dayjs from 'dayjs';
 import { DatePicker } from './DatePicker';
 import { PriorityPicker } from './PriorityPicker';
+import useTaskStore from '../model/store';
 
 const initialValues: PartialTask = {
     name: "",
@@ -23,15 +23,14 @@ const initialValues: PartialTask = {
 };
 
 export function TaskAdder({ modalOpen, setModalOpen }: TaskAdderProps) {
-    const [tasks, setTasks] = useLocalStorage<Task[]>("tasks", []);
+    const { addTask } = useTaskStore();
     const [dateOpen, setDateOpen] = useState(false);
     const [priorityOpen, setPriorityOpen] = useState(false);
 
     const handleDateOpenChange = useCallback(handleOpen(setDateOpen), []);
     const handlePriorityOpenChange = useCallback(handleOpen(setPriorityOpen), []);
     const handleSubmit = (values: PartialTask) => {
-        const task = createTask(values);
-        setTasks([...tasks, task]);
+        addTask(createTask(values));
         setModalOpen(false);
     };
 
