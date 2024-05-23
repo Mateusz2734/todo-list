@@ -6,14 +6,15 @@ import { ColorPaletteProp } from '@mui/joy/styles';
 
 type DateChipProps = {
     date: string | undefined;
+    done?: boolean;
 };
 
-export function DateChip({ date }: DateChipProps) {
+export function DateChip({ date, done }: DateChipProps) {
     if (!date) {
         return undefined;
     }
 
-    const [fmt, color] = dateDisplay(date);
+    const [fmt, color] = dateDisplay(date, done);
 
     return (
         <Chip size="sm" color={color}>
@@ -23,17 +24,20 @@ export function DateChip({ date }: DateChipProps) {
 
 }
 
-function dateDisplay(strDate: string): [string, ColorPaletteProp] {
+function dateDisplay(strDate: string, done: boolean | undefined): [string, ColorPaletteProp] {
     const currentDate = dayjs();
     const date = dayjs(strDate);
 
     if (date.isSame(currentDate.subtract(1, "day"), "day")) {
-        return ["Yesterday", "danger"];
+        return ["Yesterday", done ? "neutral" : "danger"];
     } else if (date.isSame(currentDate, "day")) {
         return ["Today", "success"];
     } else if (date.isSame(currentDate.add(1, "day"), "day")) {
         return ["Tomorrow", "warning"];
     } else if (date.isBefore(currentDate, "day")) {
+        if (done) {
+            return [date.format("D MMM"), "neutral"];
+        }
         return ["Overdue", "danger"];
     } else {
         return [date.format("D MMM"), "neutral"];

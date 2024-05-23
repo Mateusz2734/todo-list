@@ -48,7 +48,7 @@ export function TaskCard({ task, onDelete, onMutate }: TaskCardProps) {
                 <Stack width="100%">
                     <Typography level="title-sm">{task.name}</Typography>
                     <Typography level="body-sm">{task.description}</Typography>
-                    <DateChip date={task.dueDate} />
+                    <DateChip date={task.dueDate} done={task.status === "done"} />
                 </Stack>
 
                 <IconButton color="danger" variant="plain" onClick={() => onDelete(task.id)}>
