@@ -38,8 +38,8 @@ export default function Layout() {
                     >
                         <Box sx={{ px: { xs: 2, md: 6 } }}>
                             <Breadcrumbs />
-                            <Stack alignItems={"center"} >
-                                <Stack width={{ sm: "80%", xs: "90%" }} alignItems={"center"} >
+                            <Stack alignItems="center" >
+                                <Stack width={{ sm: "80%", xs: "90%" }} alignItems="center" >
                                     <Outlet />
                                 </Stack>
                             </Stack>

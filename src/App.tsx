@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import TasksLayout from './components/TasksLayout';
 import Layout from './components/Layout';
@@ -16,7 +16,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/tasks" element={<TasksLayout />}>
-          <Route index element={<></>} />
+          <Route index element={<Navigate to="/tasks/inbox" />} />
           <Route path="inbox" element={<AllTasks />} />
           <Route path="today" element={<TodayTasks />} />
           <Route path="done" element={<DoneTasks />} />
