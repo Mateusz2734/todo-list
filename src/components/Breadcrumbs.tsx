@@ -11,20 +11,22 @@ import { SitemapItem } from '../types';
 
 export function Breadcrumbs() {
     const location = useLocation();
+
     return (
         <JoyBreadcrumbs
             aria-label="breadcrumbs" size="sm"
             separator={<ChevronRightRoundedIcon />}
             sx={{ pl: 0 }}
         >
-            <Link
+            {location.pathname === "/" ? <HomeRoundedIcon /> : <Link
                 underline="none"
                 color="primary"
                 href="/"
                 aria-label="Home"
             >
                 <HomeRoundedIcon />
-            </Link>
+            </Link>}
+
             {getBreadcrumbs(location.pathname, sitemap)}
         </JoyBreadcrumbs>
     );
