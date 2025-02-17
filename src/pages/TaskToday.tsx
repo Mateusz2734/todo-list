@@ -17,7 +17,7 @@ export default function TaskTodayPage() {
 
     useEffect(() => {
         setTodayTasks(filterTasks((task) => dayjs(task.dueDate).isSame(today, "day")));
-    }, [tasks]);
+    }, [filterTasks, tasks, today]);
 
     return (
         <AccordionGroup>
