@@ -1,5 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Box from '@mui/joy/Box';
+import { Toaster } from 'sonner';
+import { useTheme } from '@mui/joy';
 
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -8,8 +10,11 @@ import { Stack } from '@mui/joy';
 
 
 export default function Layout() {
+    const theme = useTheme();
+
     return (
         <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
+            <Toaster richColors theme={theme.palette.colorScheme} closeButton />
             <Sidebar />
             <Header />
             <Box
