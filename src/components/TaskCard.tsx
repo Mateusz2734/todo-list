@@ -11,7 +11,7 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import useTaskStore from '../model/store';
 import { HoverableIcon } from './HoverableIcon';
 import { priorityColors } from '../model/priority';
-import { Task } from '../types';
+import { Status, Task } from '../types';
 import { DateChip } from './DateChip';
 
 type TaskCardProps = {
@@ -24,7 +24,7 @@ export function TaskCard({ task }: TaskCardProps) {
     const hoverableIconProps = task.status === "done" ? {
         DefaultIcon: RestoreIcon,
         onClick: () => {
-            const updatedTask: Task = { ...task, status: "todo" };
+            const updatedTask: Task = { ...task, status: Status.TODO };
             editTask(task.id, updatedTask);
         }
     } : {
@@ -32,7 +32,7 @@ export function TaskCard({ task }: TaskCardProps) {
         HoverIcon: CheckCircleIcon,
         color: priorityColors.find((elem) => elem.priority === task.priority)!.color,
         onClick: () => {
-            const updatedTask: Task = { ...task, status: "done" };
+            const updatedTask: Task = { ...task, status: Status.DONE };
             editTask(task.id, updatedTask);
         }
     };

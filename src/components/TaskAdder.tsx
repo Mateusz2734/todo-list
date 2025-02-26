@@ -9,7 +9,7 @@ import Button from '@mui/joy/Button';
 import Divider from '@mui/joy/Divider';
 
 import { PlainInput } from './PlainInput';
-import { PartialTask } from '../types';
+import { PartialTask, Priority } from '../types';
 import { createTask } from '../model/task';
 import { DatePicker } from './DatePicker';
 import { PriorityPicker } from './PriorityPicker';
@@ -19,7 +19,7 @@ const initialValues: PartialTask = {
     name: "",
     description: "",
     dueDate: dayjs(new Date()),
-    priority: "none",
+    priority: Priority.NONE,
 };
 
 export function TaskAdder({ modalOpen, setModalOpen }: TaskAdderProps) {
@@ -90,7 +90,7 @@ export function TaskAdder({ modalOpen, setModalOpen }: TaskAdderProps) {
             </ModalDialog>
         </ Modal >
     );
-};
+}
 
 const slotProps = {
     root: {

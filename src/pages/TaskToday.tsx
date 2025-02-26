@@ -13,11 +13,13 @@ import { Task } from "../types";
 export default function TaskTodayPage() {
     const { tasks, filterTasks } = useTaskStore();
     const [todayTasks, setTodayTasks] = useState<Task[]>([]);
-    const today = dayjs();
+
 
     useEffect(() => {
+        const today = dayjs();
+
         setTodayTasks(filterTasks((task) => dayjs(task.dueDate).isSame(today, "day")));
-    }, [filterTasks, tasks, today]);
+    }, [filterTasks, tasks]);
 
     return (
         <AccordionGroup>
